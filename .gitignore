@@ -1,0 +1,60 @@
+.idea
+.idea/
+.idea/*.*
+*.iml
+.settings
+.project
+.classpath
+.vscode
+/.groovy/*
+*.orig
+test-output/
+
+##################################################################################
+# https://github.com/github/gitignore/blob/master/Global/MicrosoftOffice.gitignore
+*.tmp
+
+# Word temporary
+~$*.doc*
+
+# Excel temporary
+~$*.xls*
+
+# Excel Backup File
+*.xlk
+
+# PowerPoint temporary
+~$*.ppt*
+
+# Visio autosave temporary files
+*.~vsd*
+
+################################################################
+# https://github.com/github/gitignore/blob/master/Java.gitignore
+
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+**/target/
+platform/logs/
+
+
+config-files-list.txt

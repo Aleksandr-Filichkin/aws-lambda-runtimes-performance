@@ -1,0 +1,10 @@
+{
+  "name": "node-lambda",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Aleksandr FIlichkin",
+  "license": "MIT",
+  "dependencies": {
+    "uuid": "^2.0.3"
+  }
+}

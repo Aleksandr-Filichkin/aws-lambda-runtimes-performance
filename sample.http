@@ -1,0 +1,164 @@
+# curl -X PUT "https://subscriptionservice-use1.ppe.alerts.refinitiv.com/alerts/v2/subscriptions/80f6ce4d-a04e-4845-b1a3-86ee6cd58818" -H "accept: */*" -H "X-Correlation-Id: dasda" -H "X-User-Id: PAXTRA83196" -H "host: testhost" -H "Content-Type: application/json" -d "{ \"id\": \"80f6ce3d-a04e-4845-b1a3-86ee6cd58818\", \"type\": \"subscription\", \"alertType\": \"CEAssets\", \"name\": \"k0ObKT8o2\", \"created\": \"2021-09-02T13:38:40.758088Z\", \"modified\": \"2021-09-02T13:38:40.758051Z\", \"message\": \"testMessage\", \"lifeTime\": { \"expire\": \"2022-09-01\", \"maxNotifications\": 1, \"deactivation\": \"deactivate\" }, \"subscriber\": { \"id\": \"PAXTRA83196\", \"vendorType\": \"eikon\" }, \"deliveries\": [ { \"type\": \"immediate\", \"device\": { \"type\": \"email\", \"qualifiers\": [ \"additional\" ], \"addresses\": [ \"anastasiya.liavotskaya@refinitiv.com\" ] } } ], \"triggers\": [ { \"alertType\": \"CEAssets\", \"id\": \"1\", \"format\": \"odata\", \"query\": \"query='Barcelona or Sacramento'&$filter=(Type eq '1')\", \"version\": 1 } ], \"appInfo\": { \"name\": \"eikon\", \"version\": \"1.2.3.4\" }}"
+PUT https://subscriptionservice-use1.alerts.refinitiv.com/alerts/v2/subscriptions/80f6ce4d-a04e-4845-b1a3-86ee6cd58818
+accept: */*
+X-Correlation-Id: dasda
+X-User-Id: SL1-8CXKIVQ
+host: testhost
+Content-Type: application/json
+
+{
+  "alertType": "News",
+  "appInfo": {
+    "name": "demo",
+    "version": "1.0"
+  },
+  "name": "News Alert 2",
+  "deliveries": [
+    {
+      "type": "immediate",
+      "device": {
+        "type": "email",
+        "qualifiers": [
+          "primary"
+        ]
+      }
+    },
+    {
+      "type": "immediate",
+      "device": {
+        "type": "app",
+        "qualifiers": [
+          "popup",
+          "mobile",
+          "inbox",
+          "toast"
+        ]
+      }
+    }
+  ],
+  "lifeTime": {
+    "expire": "2025-04-01"
+  },
+  "triggers": [
+    {
+      "id": "0",
+      "alertType": "News",
+      "format": "odata",
+      "version": 1,
+      "query": "query='someNews'"
+    }
+  ],
+  "universe": {
+    "rics": [
+      "EPAM.K"
+    ]
+  },
+  "uiPayload": {
+    "symbols": [
+      {
+        "id": "EPAM.K",
+        "name": "EPAM.K",
+        "category": "Equities"
+      }
+    ],
+    "keyword": {
+      "keyword": "keyword",
+      "isHeadline": false
+    },
+    "onlyAAAStories": false,
+    "geographies": {
+      "included": [
+        {
+          "id": "G:8B",
+          "text": "Belarus"
+        }
+      ],
+      "required": [],
+      "excluded": []
+    }
+  }
+}
+
+###
+
+
+
+
+POST    https://API-GATEWAY/Prod/java/book
+accept: application/json
+content-type: application/json
+
+{
+  "name": "Sotnikov",
+  "author": "Vasil Baykoav"
+}
+###
+POST    https://API-GATEWAY/Prod/graal/book
+accept: application/json
+content-type: application/json
+
+{
+"name": "Sotnikov",
+"author": "Vasil Baykoav"
+}
+
+###
+POST    https://API-GATEWAY/Prod/rust/book
+accept: application/json
+content-type: application/json
+
+{
+  "name": "Sotnikov",
+  "author": "Vasil Baykoav"
+}
+
+###
+POST    https://API-GATEWAY/Prod/node/book
+accept: application/json
+content-type: application/json
+
+{
+  "name": "Sotnikov",
+  "author": "Vasil Baykoav"
+}
+
+###
+POST    https://API-GATEWAY/Prod/py/book
+accept: application/json
+content-type: application/json
+
+{
+  "name": "Sotnikov",
+  "author": "Vasil Baykoav"
+}
+
+###
+POST    https://API-GATEWAY/Prod/go/book
+accept: application/json
+content-type: application/json
+
+{
+  "name": "Sotnikov",
+  "author": "Vasil Baykoav"
+}
+
+###
+POST    https://API-GATEWAY/Prod/dotnet/book
+accept: application/json
+content-type: application/json
+
+{
+  "name": "Sotnikov",
+  "author": "Vasil Baykoav"
+}
+
+###
+POST    https://API-GATEWAY/Prod/ruby/book
+accept: application/json
+content-type: application/json
+
+{
+"name": "Sotnikov",
+"author": "Vasil Baykoav"
+}
+

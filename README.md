@@ -6,9 +6,10 @@ AWS Lambda Performance comparison
 - NodeJs
 - Python
 - Go
+- Ruby
+- .Net
 - Custom runtime with GraalVM
 - Custom runtime with Rust
-- TODO: Ruby amd .Net
 
 
 Compare cold starts and warm state for all AWS runtimes 

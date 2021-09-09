@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using Newtonsoft.Json;
 
-namespace DonNetFunction
+namespace DotNetFunction
 {
     public class Book
     {

@@ -149,7 +149,7 @@ Resources:
   NodeJsFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: node-lambda/
+      CodeUri: nodejs/NodeJsFunction
       Handler: lambda.create
       Runtime: nodejs14.x
       MemorySize: 256
@@ -169,7 +169,7 @@ Resources:
   DotNetFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: dotnet-lambda/src/DotNetFunction/
+      CodeUri: dotnet/DotNetFunction
       Handler: DotNetFunction::DotNetFunction.Function::FunctionHandler
       Runtime: dotnetcore3.1
       MemorySize: 256
@@ -189,7 +189,7 @@ Resources:
   RubyFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: ruby-lambda/
+      CodeUri: ruby/RubyFunction
       Handler: app.create
       Runtime: ruby2.7
       MemorySize: 256

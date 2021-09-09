@@ -14,7 +14,7 @@ using JsonSerializer = Amazon.Lambda.Serialization.Json.JsonSerializer;
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
 [assembly: LambdaSerializer(typeof(JsonSerializer))]
 
-namespace DonNetFunction
+namespace DotNetFunction
 {
 
     public class Function

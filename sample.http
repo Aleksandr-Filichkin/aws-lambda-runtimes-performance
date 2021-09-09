@@ -1,5 +1,5 @@
 
-POST    https://API-GATEWAY/Prod/java/book
+POST    https://{API-GATEWAY}/Prod/java/book
 accept: application/json
 content-type: application/json
 
@@ -8,7 +8,7 @@ content-type: application/json
   "author": "Vasil Baykoav"
 }
 ###
-POST    https://API-GATEWAY/Prod/graal/book
+POST    https://{API-GATEWAY}/Prod/graal/book
 accept: application/json
 content-type: application/json
 
@@ -18,7 +18,7 @@ content-type: application/json
 }
 
 ###
-POST    https://API-GATEWAY/Prod/rust/book
+POST    https://{API-GATEWAY}/Prod/rust/book
 accept: application/json
 content-type: application/json
 
@@ -28,7 +28,7 @@ content-type: application/json
 }
 
 ###
-POST    https://API-GATEWAY/Prod/node/book
+POST    https://{API-GATEWAY}/Prod/node/book
 accept: application/json
 content-type: application/json
 
@@ -38,7 +38,7 @@ content-type: application/json
 }
 
 ###
-POST    https://API-GATEWAY/Prod/py/book
+POST    https://{API-GATEWAY}/Prod/py/book
 accept: application/json
 content-type: application/json
 
@@ -48,7 +48,7 @@ content-type: application/json
 }
 
 ###
-POST    https://API-GATEWAY/Prod/go/book
+POST    https://{API-GATEWAY}/Prod/go/book
 accept: application/json
 content-type: application/json
 
@@ -58,7 +58,7 @@ content-type: application/json
 }
 
 ###
-POST    https://API-GATEWAY/Prod/dotnet/book
+POST    https://{API-GATEWAY}/Prod/dotnet/book
 accept: application/json
 content-type: application/json
 
@@ -68,7 +68,7 @@ content-type: application/json
 }
 
 ###
-POST    https://API-GATEWAY/Prod/ruby/book
+POST    https://{API-GATEWAY}/Prod/ruby/book
 accept: application/json
 content-type: application/json
 

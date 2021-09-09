@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DonNetFunction", "src\DonNetFunction\DonNetFunction.csproj", "{411BFDCB-AE56-4F02-B369-03D4A067D03A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetFunction", "src\DotNetFunction\DotNetFunction.csproj", "{411BFDCB-AE56-4F02-B369-03D4A067D03A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

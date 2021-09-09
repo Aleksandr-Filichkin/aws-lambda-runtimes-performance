@@ -19,10 +19,12 @@ cd ./../
 ## Deploy lambdas
 
 alias sam='sam.cmd'
-sam build --use-container NodeJsFunction
-sam build --use-container RubyFunction
-
+sam build --use-container NodeJsFunction -b nodejs
+sam build --use-container RubyFunction -b ruby
 #todo move to docker .net lambda
-sam build DotNetFunction
-#
-sam deploy
+sam build DotNetFunction -b dotnet
+
+
+
+# deploy using another template because it refers to another build folder which where built before in docker
+sam deploy -t template-final.yaml

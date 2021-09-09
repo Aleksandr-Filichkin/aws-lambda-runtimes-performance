@@ -16,10 +16,8 @@ cd ./java-graalvm-lambda
 sh build.sh
 cd ./../
 
-
-#cd ./../
 ## Deploy lambdas
-#cd ../
+
 alias sam='sam.cmd'
 sam build --use-container NodeJsFunction
 sam build --use-container RubyFunction
@@ -27,4 +25,4 @@ sam build --use-container RubyFunction
 #todo move to docker .net lambda
 sam build DotNetFunction
 #
-#sam deploy
+sam deploy

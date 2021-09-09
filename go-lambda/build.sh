@@ -1,6 +1,8 @@
 #!/bin/sh
 set -e
 
+mkdir -p "output"
+
 #builds a native binary and zip
 docker build  -t go-lambda .
 

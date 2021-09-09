@@ -108,7 +108,7 @@ Resources:
     Properties:
       Runtime: go1.x
       Handler: lambda-go
-      CodeUri: go-lambda/output
+      CodeUri: go-lambda/output/
       MemorySize: 256
       Tracing: Active
       Policies:

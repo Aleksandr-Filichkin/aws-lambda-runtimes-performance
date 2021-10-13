@@ -16,7 +16,6 @@ namespace DotNetFunction
 
     public class Function
     {
-        private static readonly Dictionary<string, string> _headers = new Dictionary<string, string> { { "Content-Type", "application/json" } };
         private static readonly AmazonDynamoDBClient _dbClient = new AmazonDynamoDBClient(RegionEndpoint.USEast2);
 
         public async Task<APIGatewayProxyResponse> FunctionHandler(APIGatewayProxyRequest apigProxyEvent, ILambdaContext context)
@@ -41,7 +40,7 @@ namespace DotNetFunction
             {
                 Body = System.Text.Json.JsonSerializer.Serialize(book),
                 StatusCode = 201,
-                Headers = _headers
+                Headers = new Dictionary<string, string> { { "Content-Type", "application/json" } }
             };
         }
     }

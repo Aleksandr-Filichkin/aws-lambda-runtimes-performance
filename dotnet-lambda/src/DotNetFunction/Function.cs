@@ -1,13 +1,10 @@
-using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Amazon;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.Model;
 using Amazon.Lambda.APIGatewayEvents;
 using Amazon.Lambda.Core;
-using Newtonsoft.Json;
 using JsonSerializer = Amazon.Lambda.Serialization.Json.JsonSerializer;
 
 
@@ -19,9 +16,8 @@ namespace DotNetFunction
 
     public class Function
     {
-
-        private static  AmazonDynamoDBClient _dbClient=new AmazonDynamoDBClient(RegionEndpoint.USEast2);
-
+        private static readonly Dictionary<string, string> _headers = new Dictionary<string, string> { { "Content-Type", "application/json" } };
+        private static readonly AmazonDynamoDBClient _dbClient = new AmazonDynamoDBClient(RegionEndpoint.USEast2);
 
         public async Task<APIGatewayProxyResponse> FunctionHandler(APIGatewayProxyRequest apigProxyEvent, ILambdaContext context)
         {
@@ -40,11 +36,12 @@ namespace DotNetFunction
                 }
             };
             await _dbClient.PutItemAsync(request);
+
             return new APIGatewayProxyResponse
             {
-                Body = JsonConvert.SerializeObject(book),
+                Body = System.Text.Json.JsonSerializer.Serialize(book),
                 StatusCode = 201,
-                Headers = new Dictionary<string, string> { { "Content-Type", "application/json" } }
+                Headers = _headers
             };
         }
     }

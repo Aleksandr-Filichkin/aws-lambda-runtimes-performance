@@ -1,5 +1,5 @@
 
-POST    https://{API-GATEWAY}/Prod/java/book
+POST    https://hjsnocesp8.execute-api.us-east-2.amazonaws.com/Prod/java/book
 accept: application/json
 content-type: application/json
 
@@ -8,7 +8,7 @@ content-type: application/json
   "author": "Vasil Baykoav"
 }
 ###
-POST    https://{API-GATEWAY}/Prod/graal/book
+POST    https://hjsnocesp8.execute-api.us-east-2.amazonaws.com/Prod/java-arm/book
 accept: application/json
 content-type: application/json
 
@@ -18,7 +18,16 @@ content-type: application/json
 }
 
 ###
-POST    https://{API-GATEWAY}/Prod/rust/book
+POST    https://hjsnocesp8.execute-api.us-east-2.amazonaws.com/Prod/rust/book
+accept: application/json
+content-type: application/json
+
+{
+  "name": "Sotnikov",
+  "author": "Vasil Baykoav"
+}
+###
+POST    https://hjsnocesp8.execute-api.us-east-2.amazonaws.com/Prod/rust-arm/book
 accept: application/json
 content-type: application/json
 
@@ -28,7 +37,7 @@ content-type: application/json
 }
 
 ###
-POST    https://{API-GATEWAY}/Prod/node/book
+POST    https://hjsnocesp8.execute-api.us-east-2.amazonaws.com/Prod/node/book
 accept: application/json
 content-type: application/json
 
@@ -38,7 +47,7 @@ content-type: application/json
 }
 
 ###
-POST    https://{API-GATEWAY}/Prod/py/book
+POST    https://hjsnocesp8.execute-api.us-east-2.amazonaws.com/Prod/node-arm/book
 accept: application/json
 content-type: application/json
 
@@ -48,7 +57,7 @@ content-type: application/json
 }
 
 ###
-POST    https://{API-GATEWAY}/Prod/go/book
+POST    https://hjsnocesp8.execute-api.us-east-2.amazonaws.com/Prod/py/book
 accept: application/json
 content-type: application/json
 
@@ -58,7 +67,7 @@ content-type: application/json
 }
 
 ###
-POST    https://{API-GATEWAY}/Prod/dotnet/book
+POST    https://hjsnocesp8.execute-api.us-east-2.amazonaws.com/Prod/py-arm/book
 accept: application/json
 content-type: application/json
 
@@ -68,7 +77,37 @@ content-type: application/json
 }
 
 ###
-POST    https://{API-GATEWAY}/Prod/ruby/book
+POST    https://hjsnocesp8.execute-api.us-east-2.amazonaws.com/Prod/go/book
+accept: application/json
+content-type: application/json
+
+{
+  "name": "Sotnikov",
+  "author": "Vasil Baykoav"
+}
+
+###
+POST    https://hjsnocesp8.execute-api.us-east-2.amazonaws.com/Prod/dotnet/book
+accept: application/json
+content-type: application/json
+
+{
+  "name": "Sotnikov",
+  "author": "Vasil Baykoav"
+}
+
+###
+POST    https://hjsnocesp8.execute-api.us-east-2.amazonaws.com/Prod/dotnet-arm/book
+accept: application/json
+content-type: application/json
+
+{
+  "name": "Sotnikov",
+  "author": "Vasil Baykoav"
+}
+
+###
+POST    https://hjsnocesp8.execute-api.us-east-2.amazonaws.com/Prod/ruby/book
 accept: application/json
 content-type: application/json
 
@@ -77,3 +116,23 @@ content-type: application/json
 "author": "Vasil Baykoav"
 }
 
+###
+POST    https://hjsnocesp8.execute-api.us-east-2.amazonaws.com/Prod/ruby-arm/book
+accept: application/json
+content-type: application/json
+
+{
+  "name": "Sotnikov",
+  "author": "Vasil Baykoav"
+}
+
+###
+
+POST    https://hjsnocesp8.execute-api.us-east-2.amazonaws.com/Prod/graal-arm/book
+accept: application/json
+content-type: application/json
+
+{
+"name": "Sotnikov",
+"author": "Vasil Baykoav"
+}

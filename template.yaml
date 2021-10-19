@@ -158,6 +158,9 @@ Resources:
         - DynamoDBCrudPolicy:
             TableName: !Ref BooksTable
       Timeout: 10
+      Environment:
+        Variables:
+          AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
 
       Events:
         CreateBook:

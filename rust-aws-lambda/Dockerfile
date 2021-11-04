@@ -23,3 +23,7 @@ RUN chmod +x app
 RUN #chmod +x ./app
 RUN zip -j function.zip bootstrap app
 
+RUN cp target/aarch64-unknown-linux-gnu/release/rust-aws-lambda ./app
+RUN mkdir "arm"
+RUN zip -j arm/function.zip bootstrap app
+

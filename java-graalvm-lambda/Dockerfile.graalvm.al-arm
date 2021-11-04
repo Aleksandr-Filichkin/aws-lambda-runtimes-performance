@@ -1,0 +1,17 @@
+FROM  ghcr.io/graalvm/graalvm-ce:latest@sha256:345b602c33697a3387fa3e8101647c0c3f81c30dc9ec264e84a7d351dbd57ade
+RUN $JAVA_HOME/bin/gu install native-image
+WORKDIR /tmp/dist-arm
+ADD ./output/lambda-graalvm-1.0-SNAPSHOT.jar ./app.jar
+RUN $JAVA_HOME/bin/native-image -jar ./app.jar --verbose --no-fallback
+RUN  microdnf install zip
+
+ADD bootstrap bootstrap
+
+RUN chmod +x bootstrap
+RUN chmod +x ./app
+
+RUN zip -j function.zip bootstrap app
+
+
+ENTRYPOINT ["./app"]
+

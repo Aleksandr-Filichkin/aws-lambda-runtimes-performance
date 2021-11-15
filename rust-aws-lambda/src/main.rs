@@ -24,7 +24,7 @@ lazy_static! {
 }
 
 
-#[tokio::main]
+#[tokio::main(flavor = "current_thread")]
 async fn main() -> Result<(), Error> {
     SimpleLogger::new().with_level(LevelFilter::Info).init().unwrap();
     lambda_runtime::run(handler(func)).await?;

@@ -1,0 +1,23 @@
+FROM golang:1.16
+
+WORKDIR /go/src/app
+COPY . .
+
+#RUN go get -d -v ./...
+#RUN go install -v ./...
+RUN cat /etc/os-release
+
+RUN GOARCH=amd64  GOOS=linux go build -tags lambda.norpc -o lambda-go
+
+RUN apt-get update
+RUN apt install zip -y
+
+ADD bootstrap bootstrap
+
+RUN chmod +x bootstrap
+RUN chmod +x ./lambda-go
+#
+RUN zip -j function.zip bootstrap lambda-go
+CMD ["lambda-go"]
+
+

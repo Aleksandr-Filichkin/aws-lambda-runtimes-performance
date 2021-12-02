@@ -6,7 +6,7 @@ cd ./rust-aws-lambda
 sh build.sh
 cd ./../
 ##
-##build Go
+#build Go
 cd ./go-lambda
 sh build.sh
 cd ./../
@@ -23,6 +23,7 @@ sam build --use-container NodeJsFunction -b nodejs
 sam build --use-container RubyFunction -b ruby
 #todo move to docker .net lambda
 sam build DotNetFunction -b dotnet
+sam build DotNetARMFunction -b dotnet-arm
 
 
 

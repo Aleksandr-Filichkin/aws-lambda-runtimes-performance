@@ -1,7 +1,10 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: AWS Serverless Micronaut API
-
+Parameters:
+  DockerTag:
+      Type: String
+      
 Resources:
   DotNetFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
@@ -20,7 +23,7 @@ Resources:
             Path: /dotnet/book
             Method: post
     Metadata:
-      DockerTag: "!Ref DockerTag"
+      DockerTag: !Sub "${DockerTag}"
       DockerContext: dotnet-lambda/src/DotNetFunction
       Dockerfile: dotnet-lambda/Dockerfile
       DockerBuildArgs:

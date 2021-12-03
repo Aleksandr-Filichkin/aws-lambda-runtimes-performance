@@ -26,11 +26,11 @@ namespace DotNetFunction
             try
             {
                 var body = apigProxyEvent.Body;
-                System.Console.WriteLine($"Entered FunctionHandler\n[{body}]");
+
                 Book book =
                     System.Text.Json.JsonSerializer.Deserialize<Book>(body);
                 book.id = System.Guid.NewGuid().ToString();
-                System.Console.WriteLine($"book.id: [{book.id}]");
+                
                 var request = new PutItemRequest
                 {
                     TableName = "book",
@@ -41,10 +41,8 @@ namespace DotNetFunction
                     { "author", new AttributeValue { S = book.author }}
                 }
                 };
-                System.Console.WriteLine($"request: [{request}]");
-                var resp = await _dbClient.PutItemAsync(request);
 
-                Console.WriteLine($"Database response: {resp.HttpStatusCode}");
+                var resp = await _dbClient.PutItemAsync(request);
 
                 return new APIGatewayProxyResponse
                 {
@@ -56,7 +54,6 @@ namespace DotNetFunction
             catch(Exception ex)
             {
                 context.Logger.LogLine(ex.ToString());
-                Console.WriteLine($"Caught Exception: {ex}");
                 ex.Data.Add("Body", apigProxyEvent.Body);
                 throw;
             }

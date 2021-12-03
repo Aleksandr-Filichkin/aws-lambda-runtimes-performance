@@ -4,14 +4,14 @@ Description: AWS Serverless Micronaut API
 Parameters:
   DockerTag:
       Type: String
-      
+
 Resources:
   DotNetFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
 
     Properties:
       PackageType: Image
-      ImageUri: 440457658525.dkr.ecr.us-east-2.amazonaws.com/lambda-benchmarks:latest
+      ImageUri: !Sub "${DockerTag}"
       # Role: arn:aws:iam::440457658525:user/benchmark
       Policies:
         - DynamoDBCrudPolicy:

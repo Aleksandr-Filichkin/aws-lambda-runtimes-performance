@@ -1,16 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Amazon.Lambda.APIGatewayEvents;
+using Amazon.Lambda.Core;
+using Amazon.Lambda.RuntimeSupport;
+using Amazon.Lambda.Serialization.SystemTextJson;
+
 
 namespace DotNetFunction
 {
-    public class Program
+    public static class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] _)
         {
-            Console.WriteLine("Run me with AWS Lambda.");
+            Func<APIGatewayProxyRequest, ILambdaContext, Task<APIGatewayProxyResponse>> 
+                func = Function.FunctionHandler;
+            using var handlerWrapper = HandlerWrapper.GetHandlerWrapper(func, new DefaultLambdaJsonSerializer());
+            using var bootstrap = new LambdaBootstrap(handlerWrapper);
+            await bootstrap.RunAsync();
         }
     }
 }

@@ -3,387 +3,386 @@ Transform: AWS::Serverless-2016-10-31
 Description: AWS Serverless Micronaut API
 
 Resources:
-  JavaFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: java-graalvm-lambda/output/lambda-java-1.0-SNAPSHOT.jar
-      Handler: com.filichkin.blog.lambda.v2.handler.BookHandler::handleRequest
-      Runtime: java11
-      MemorySize: 256
-      Tracing: Active
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref BooksTable
-      Timeout: 15
-      Events:
-        CreateBook:
-          Type: Api
-          Properties:
-            Path: /java/book
-            Method: post
+#   JavaFunction:
+#     Type: AWS::Serverless::Function
+#     Properties:
+#       CodeUri: java-graalvm-lambda/output/lambda-java-1.0-SNAPSHOT.jar
+#       Handler: com.filichkin.blog.lambda.v2.handler.BookHandler::handleRequest
+#       Runtime: java11
+#       MemorySize: 256
+#       Tracing: Active
+#       Policies:
+#         - DynamoDBCrudPolicy:
+#             TableName: !Ref BooksTable
+#       Timeout: 15
+#       Events:
+#         CreateBook:
+#           Type: Api
+#           Properties:
+#             Path: /java/book
+#             Method: post
 
-  JavaARMFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: java-graalvm-lambda/output/lambda-java-1.0-SNAPSHOT.jar
-      Handler: com.filichkin.blog.lambda.v2.handler.BookHandler::handleRequest
-      Runtime: java11
-      MemorySize: 256
-      Tracing: Active
-      Architectures:
-        - arm64
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref BooksTable
-      Timeout: 15
-      Events:
-        CreateBook:
-          Type: Api
-          Properties:
-            Path: /java-arm/book
-            Method: post
+#   JavaARMFunction:
+#     Type: AWS::Serverless::Function
+#     Properties:
+#       CodeUri: java-graalvm-lambda/output/lambda-java-1.0-SNAPSHOT.jar
+#       Handler: com.filichkin.blog.lambda.v2.handler.BookHandler::handleRequest
+#       Runtime: java11
+#       MemorySize: 256
+#       Tracing: Active
+#       Architectures:
+#         - arm64
+#       Policies:
+#         - DynamoDBCrudPolicy:
+#             TableName: !Ref BooksTable
+#       Timeout: 15
+#       Events:
+#         CreateBook:
+#           Type: Api
+#           Properties:
+#             Path: /java-arm/book
+#             Method: post
 
 
-  GraalVMFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: not.used.in.provided.runtime
-      Runtime: provided
-      CodeUri: java-graalvm-lambda/output/dist/function.zip
-      MemorySize: 256
-      Tracing: Active
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref BooksTable
-      Timeout: 10
-      Environment:
-        Variables:
-          TABLE_NAME: test
+#   GraalVMFunction:
+#     Type: AWS::Serverless::Function
+#     Properties:
+#       Handler: not.used.in.provided.runtime
+#       Runtime: provided
+#       CodeUri: java-graalvm-lambda/output/dist/function.zip
+#       MemorySize: 256
+#       Tracing: Active
+#       Policies:
+#         - DynamoDBCrudPolicy:
+#             TableName: !Ref BooksTable
+#       Timeout: 10
+#       Environment:
+#         Variables:
+#           TABLE_NAME: test
 
-      Events:
-        CreateBook:
-          Type: Api
-          Properties:
-            Path: /graal/book
-            Method: post
-#
-  GraalVMARMFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: not.used.in.provided.runtime
-      Runtime: provided.al2
-      CodeUri: java-graalvm-lambda/output-arm/dist-arm/function.zip
-      MemorySize: 256
-      Architectures:
-        - arm64
-      Tracing: Active
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref BooksTable
-      Timeout: 10
-      Environment:
-        Variables:
-          TABLE_NAME: test
+#       Events:
+#         CreateBook:
+#           Type: Api
+#           Properties:
+#             Path: /graal/book
+#             Method: post
+# #
+#   GraalVMARMFunction:
+#     Type: AWS::Serverless::Function
+#     Properties:
+#       Handler: not.used.in.provided.runtime
+#       Runtime: provided.al2
+#       CodeUri: java-graalvm-lambda/output-arm/dist-arm/function.zip
+#       MemorySize: 256
+#       Architectures:
+#         - arm64
+#       Tracing: Active
+#       Policies:
+#         - DynamoDBCrudPolicy:
+#             TableName: !Ref BooksTable
+#       Timeout: 10
+#       Environment:
+#         Variables:
+#           TABLE_NAME: test
 
-      Events:
-        CreateBook:
-          Type: Api
-          Properties:
-            Path: /graal-arm/book
-            Method: post
+#       Events:
+#         CreateBook:
+#           Type: Api
+#           Properties:
+#             Path: /graal-arm/book
+#             Method: post
 
-  RustFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: not.used.in.provided.runtime
-      Runtime: provided
-      CodeUri: rust-aws-lambda/output/function.zip
-      MemorySize: 256
-      Tracing: Active
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref BooksTable
-      Timeout: 10
-      Environment:
-        Variables:
-          TABLE_NAME: test
+#   RustFunction:
+#     Type: AWS::Serverless::Function
+#     Properties:
+#       Handler: not.used.in.provided.runtime
+#       Runtime: provided
+#       CodeUri: rust-aws-lambda/output/function.zip
+#       MemorySize: 256
+#       Tracing: Active
+#       Policies:
+#         - DynamoDBCrudPolicy:
+#             TableName: !Ref BooksTable
+#       Timeout: 10
+#       Environment:
+#         Variables:
+#           TABLE_NAME: test
 
-      Events:
-        CreateBook:
-          Type: Api
-          Properties:
-            Path: /rust/book
-            Method: post
+#       Events:
+#         CreateBook:
+#           Type: Api
+#           Properties:
+#             Path: /rust/book
+#             Method: post
 
-  RustARMFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: not.used.in.provided.runtime
-      Runtime: provided.al2
-      CodeUri: rust-aws-lambda/output-arm/function.zip
-      MemorySize: 256
-      Architectures:
-        - arm64
-      Tracing: Active
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref BooksTable
-      Timeout: 10
-      Environment:
-        Variables:
-          TABLE_NAME: test
+#   RustARMFunction:
+#     Type: AWS::Serverless::Function
+#     Properties:
+#       Handler: not.used.in.provided.runtime
+#       Runtime: provided.al2
+#       CodeUri: rust-aws-lambda/output-arm/function.zip
+#       MemorySize: 256
+#       Architectures:
+#         - arm64
+#       Tracing: Active
+#       Policies:
+#         - DynamoDBCrudPolicy:
+#             TableName: !Ref BooksTable
+#       Timeout: 10
+#       Environment:
+#         Variables:
+#           TABLE_NAME: test
 
-      Events:
-        CreateBook:
-          Type: Api
-          Properties:
-            Path: /rust-arm/book
-            Method: post
+#       Events:
+#         CreateBook:
+#           Type: Api
+#           Properties:
+#             Path: /rust-arm/book
+#             Method: post
 
-  GoFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      Runtime: go1.x
-      Handler: lambda-go
-      CodeUri: go-lambda/output/
-      MemorySize: 256
-      Tracing: Active
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref BooksTable
-      Timeout: 10
-      Environment:
-        Variables:
-          TABLE_NAME: test
+#   GoFunction:
+#     Type: AWS::Serverless::Function
+#     Properties:
+#       Runtime: go1.x
+#       Handler: lambda-go
+#       CodeUri: go-lambda/output/
+#       MemorySize: 256
+#       Tracing: Active
+#       Policies:
+#         - DynamoDBCrudPolicy:
+#             TableName: !Ref BooksTable
+#       Timeout: 10
+#       Environment:
+#         Variables:
+#           TABLE_NAME: test
 
-      Events:
-        CreateBook:
-          Type: Api
-          Properties:
-            Path: /go/book
-            Method: post
+#       Events:
+#         CreateBook:
+#           Type: Api
+#           Properties:
+#             Path: /go/book
+#             Method: post
 
-  GoCustomFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: not.used.in.provided.runtime
-      Runtime: provided
-      CodeUri: go-lambda/output-custom-runtime/function.zip
-      MemorySize: 256
-      Tracing: Active
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref BooksTable
-      Timeout: 10
-      Environment:
-        Variables:
-          TABLE_NAME: test
+#   GoCustomFunction:
+#     Type: AWS::Serverless::Function
+#     Properties:
+#       Handler: not.used.in.provided.runtime
+#       Runtime: provided
+#       CodeUri: go-lambda/output-custom-runtime/function.zip
+#       MemorySize: 256
+#       Tracing: Active
+#       Policies:
+#         - DynamoDBCrudPolicy:
+#             TableName: !Ref BooksTable
+#       Timeout: 10
+#       Environment:
+#         Variables:
+#           TABLE_NAME: test
 
-      Events:
-        CreateBook:
-          Type: Api
-          Properties:
-            Path: /go-custom/book
-            Method: post
+#       Events:
+#         CreateBook:
+#           Type: Api
+#           Properties:
+#             Path: /go-custom/book
+#             Method: post
 
-  GoARMFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: not.used.in.provided.runtime
-      Runtime: provided.al2
-      CodeUri: go-lambda/output-arm/function.zip
-      MemorySize: 256
-      Tracing: Active
-      Architectures:
-        - arm64
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref BooksTable
-      Timeout: 10
-      Environment:
-        Variables:
-          TABLE_NAME: test
+#   GoARMFunction:
+#     Type: AWS::Serverless::Function
+#     Properties:
+#       Handler: not.used.in.provided.runtime
+#       Runtime: provided.al2
+#       CodeUri: go-lambda/output-arm/function.zip
+#       MemorySize: 256
+#       Tracing: Active
+#       Architectures:
+#         - arm64
+#       Policies:
+#         - DynamoDBCrudPolicy:
+#             TableName: !Ref BooksTable
+#       Timeout: 10
+#       Environment:
+#         Variables:
+#           TABLE_NAME: test
 
-      Events:
-        CreateBook:
-          Type: Api
-          Properties:
-            Path: /go-arm/book
-            Method: post
-  #
-  PythonFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: python-lambda/
-      Handler: lambda.create
-      Runtime: python3.9
-      MemorySize: 256
-      Tracing: Active
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref BooksTable
-      Timeout: 30
+#       Events:
+#         CreateBook:
+#           Type: Api
+#           Properties:
+#             Path: /go-arm/book
+#             Method: post
+#   #
+#   PythonFunction:
+#     Type: AWS::Serverless::Function
+#     Properties:
+#       CodeUri: python-lambda/
+#       Handler: lambda.create
+#       Runtime: python3.9
+#       MemorySize: 256
+#       Tracing: Active
+#       Policies:
+#         - DynamoDBCrudPolicy:
+#             TableName: !Ref BooksTable
+#       Timeout: 30
 
-      Events:
-        CreateBook:
-          Type: Api
-          Properties:
-            Path: /py/book
-            Method: post
+#       Events:
+#         CreateBook:
+#           Type: Api
+#           Properties:
+#             Path: /py/book
+#             Method: post
 
-  PythonARMFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: python-lambda/
-      Handler: lambda.create
-      Runtime: python3.9
-      MemorySize: 256
-      Tracing: Active
-      Architectures:
-        - arm64
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref BooksTable
-      Timeout: 30
+#   PythonARMFunction:
+#     Type: AWS::Serverless::Function
+#     Properties:
+#       CodeUri: python-lambda/
+#       Handler: lambda.create
+#       Runtime: python3.9
+#       MemorySize: 256
+#       Tracing: Active
+#       Architectures:
+#         - arm64
+#       Policies:
+#         - DynamoDBCrudPolicy:
+#             TableName: !Ref BooksTable
+#       Timeout: 30
 
-      Events:
-        CreateBook:
-          Type: Api
-          Properties:
-            Path: /py-arm/book
-            Method: post
+#       Events:
+#         CreateBook:
+#           Type: Api
+#           Properties:
+#             Path: /py-arm/book
+#             Method: post
 
-  NodeJsFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: nodejs/NodeJsFunction
-      Handler: lambda.create
-      Runtime: nodejs14.x
-      MemorySize: 256
-      Environment:
-        Variables:
-          AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
-      Tracing: Active
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref BooksTable
-      Timeout: 10
+#   NodeJsFunction:
+#     Type: AWS::Serverless::Function
+#     Properties:
+#       CodeUri: nodejs/NodeJsFunction
+#       Handler: lambda.create
+#       Runtime: nodejs14.x
+#       MemorySize: 256
+#       Environment:
+#         Variables:
+#           AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+#       Tracing: Active
+#       Policies:
+#         - DynamoDBCrudPolicy:
+#             TableName: !Ref BooksTable
+#       Timeout: 10
 
-      Events:
-        CreateBook:
-          Type: Api
-          Properties:
-            Path: /node/book
-            Method: post
+#       Events:
+#         CreateBook:
+#           Type: Api
+#           Properties:
+#             Path: /node/book
+#             Method: post
 
-  NodeJsARMFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: nodejs/NodeJsFunction
-      Handler: lambda.create
-      Runtime: nodejs14.x
-      MemorySize: 256
-      Environment:
-        Variables:
-          AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
-      Architectures:
-        - arm64
-      Tracing: Active
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref BooksTable
-      Timeout: 10
+#   NodeJsARMFunction:
+#     Type: AWS::Serverless::Function
+#     Properties:
+#       CodeUri: nodejs/NodeJsFunction
+#       Handler: lambda.create
+#       Runtime: nodejs14.x
+#       MemorySize: 256
+#       Environment:
+#         Variables:
+#           AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+#       Architectures:
+#         - arm64
+#       Tracing: Active
+#       Policies:
+#         - DynamoDBCrudPolicy:
+#             TableName: !Ref BooksTable
+#       Timeout: 10
 
-      Events:
-        CreateBook:
-          Type: Api
-          Properties:
-            Path: /node-arm/book
-            Method: post
+#       Events:
+#         CreateBook:
+#           Type: Api
+#           Properties:
+#             Path: /node-arm/book
+#             Method: post
 
   DotNetFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: dotnet/DotNetFunction
-      Handler: DotNetFunction::DotNetFunction.Function::FunctionHandler
-      Runtime: dotnetcore3.1
-      MemorySize: 256
       Tracing: Active
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref BooksTable
-      Timeout: 30
-
+      Timeout: 15
       Events:
         CreateBook:
           Type: Api
           Properties:
             Path: /dotnet/book
             Method: post
-
-  DotNetARMFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-    Properties:
-      CodeUri: dotnet-arm/DotNetARMFunction
+      CodeUri: dotnet-lambda/function.zip
       Handler: DotNetFunction::DotNetFunction.Function::FunctionHandler
-      Runtime: dotnetcore3.1
+      Runtime: net6.0
       MemorySize: 256
-      Tracing: Active
-      Architectures:
-        - arm64
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref BooksTable
-      Timeout: 30
 
-      Events:
-        CreateBook:
-          Type: Api
-          Properties:
-            Path: /dotnet-arm/book
-            Method: post
+  # DotNetARMFunction:
+  #   Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+  #   Properties:
+  #     CodeUri: dotnet-arm/DotNetARMFunction
+  #     Handler: DotNetFunction::DotNetFunction.Function::FunctionHandler
+  #     Runtime: dotnetcore3.1
+  #     MemorySize: 256
+  #     Tracing: Active
+  #     Architectures:
+  #       - arm64
+  #     Policies:
+  #       - DynamoDBCrudPolicy:
+  #           TableName: !Ref BooksTable
+  #     Timeout: 30
 
-  RubyFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-    Properties:
-      CodeUri: ruby/RubyFunction
-      Handler: app.create
-      Runtime: ruby2.7
-      MemorySize: 256
-      Tracing: Active
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref BooksTable
-      Timeout: 10
+  #     Events:
+  #       CreateBook:
+  #         Type: Api
+  #         Properties:
+  #           Path: /dotnet-arm/book
+  #           Method: post
 
-      Events:
-        CreateBook:
-          Type: Api
-          Properties:
-            Path: /ruby/book
-            Method: post
+  # RubyFunction:
+  #   Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+  #   Properties:
+  #     CodeUri: ruby/RubyFunction
+  #     Handler: app.create
+  #     Runtime: ruby2.7
+  #     MemorySize: 256
+  #     Tracing: Active
+  #     Policies:
+  #       - DynamoDBCrudPolicy:
+  #           TableName: !Ref BooksTable
+  #     Timeout: 10
 
-  RubyARMFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-    Properties:
-      CodeUri: ruby/RubyFunction
-      Handler: app.create
-      Runtime: ruby2.7
-      MemorySize: 256
-      Tracing: Active
-      Architectures:
-        - arm64
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref BooksTable
-      Timeout: 10
+  #     Events:
+  #       CreateBook:
+  #         Type: Api
+  #         Properties:
+  #           Path: /ruby/book
+  #           Method: post
 
-      Events:
-        CreateBook:
-          Type: Api
-          Properties:
-            Path: /ruby-arm/book
-            Method: post
+  # RubyARMFunction:
+  #   Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+  #   Properties:
+  #     CodeUri: ruby/RubyFunction
+  #     Handler: app.create
+  #     Runtime: ruby2.7
+  #     MemorySize: 256
+  #     Tracing: Active
+  #     Architectures:
+  #       - arm64
+  #     Policies:
+  #       - DynamoDBCrudPolicy:
+  #           TableName: !Ref BooksTable
+  #     Timeout: 10
+
+  #     Events:
+  #       CreateBook:
+  #         Type: Api
+  #         Properties:
+  #           Path: /ruby-arm/book
+  #           Method: post
 
   BooksTable:
     Type: AWS::DynamoDB::Table

@@ -1,90 +1,35 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: AWS Serverless Micronaut API
+Parameters:
+  DockerTag:
+      Type: String
 
 Resources:
-
-  NodeJsFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: node-lambda/
-      Handler: lambda.create
-      Runtime: nodejs14.x
-      MemorySize: 256
-      Tracing: Active
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref BooksTable
-      Timeout: 10
-
-      Events:
-        CreateBook:
-          Type: Api
-          Properties:
-            Path: /node/book
-            Method: post
-
   DotNetFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+
     Properties:
-      CodeUri: dotnet-lambda/src/DotNetFunction/
-      Handler: DotNetFunction::DotNetFunction.Function::FunctionHandler
-      Runtime: dotnetcore3.1
-      MemorySize: 256
-      Tracing: Active
+      PackageType: Image
+      ImageUri: !Sub "${DockerTag}"
+      # Role: arn:aws:iam::440457658525:user/benchmark
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: !Ref BooksTable
-      Timeout: 30
-
+            TableName: "!Ref BooksTable"
       Events:
         CreateBook:
           Type: Api
           Properties:
             Path: /dotnet/book
             Method: post
-
-  DotNetARMFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-    Properties:
-      CodeUri: dotnet-lambda/src/DotNetFunction/
-      Handler: DotNetFunction::DotNetFunction.Function::FunctionHandler
-      Runtime: dotnetcore3.1
-      MemorySize: 256
-      Architectures:
-        - arm64
-      Tracing: Active
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref BooksTable
-      Timeout: 30
-
-      Events:
-        CreateBook:
-          Type: Api
-          Properties:
-            Path: /dotnet/book
-            Method: post
-
-  RubyFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-    Properties:
-      CodeUri: ruby-lambda/
-      Handler: app.create
-      Runtime: ruby2.7
-      MemorySize: 256
-      Tracing: Active
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref BooksTable
-      Timeout: 10
-
-      Events:
-        CreateBook:
-          Type: Api
-          Properties:
-            Path: /ruby/book
-            Method: post
+    Metadata:
+      DockerTag: !Sub "${DockerTag}"
+      DockerContext: dotnet-lambda/src/DotNetFunction
+      Dockerfile: dotnet-lambda/Dockerfile
+      DockerBuildArgs:
+        SAM_BUILD_MODE: run
+    Auth:
+      DefaultAuthorizer: AWS_IAM
 
   BooksTable:
     Type: AWS::DynamoDB::Table
@@ -100,8 +45,13 @@ Resources:
 
 
 Outputs:
-  MyServiceApi:
-    Description: URL for application
-    Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/greet'
-    Export:
-      Name: MyServiceApiV2
+  DotNetApi:
+    Description: API Gateway endpoint URL for Prod stage for DotNet function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/DotNet/
+  DotNetFunction:
+    Description: DotNet Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - DotNetFunction
+      - Arn

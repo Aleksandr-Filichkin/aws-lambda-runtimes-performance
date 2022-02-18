@@ -1,7 +1,10 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: AWS Serverless Micronaut API
-
+Parameters:
+  DockerTag:
+      Type: String
+      
 Resources:
   JavaFunction:
     Type: AWS::Serverless::Function
@@ -303,87 +306,92 @@ Resources:
 
   DotNetFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+
     Properties:
-      CodeUri: dotnet/DotNetFunction
-      Handler: DotNetFunction::DotNetFunction.Function::FunctionHandler
-      Runtime: dotnetcore3.1
-      MemorySize: 256
-      Tracing: Active
+      PackageType: Image
+      ImageUri: !Sub "${DockerTag}"
+      # Role: arn:aws:iam::440457658525:user/benchmark
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: !Ref BooksTable
-      Timeout: 30
-
+            TableName: "!Ref BooksTable"
       Events:
         CreateBook:
           Type: Api
           Properties:
             Path: /dotnet/book
             Method: post
+    Metadata:
+      DockerTag: !Sub "${DockerTag}"
+      DockerContext: dotnet-lambda/src/DotNetFunction
+      Dockerfile: dotnet-lambda/Dockerfile
+      DockerBuildArgs:
+        SAM_BUILD_MODE: run
+    Auth:
+      DefaultAuthorizer: AWS_IAM
 
-  DotNetARMFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-    Properties:
-      CodeUri: dotnet-arm/DotNetARMFunction
-      Handler: DotNetFunction::DotNetFunction.Function::FunctionHandler
-      Runtime: dotnetcore3.1
-      MemorySize: 256
-      Tracing: Active
-      Architectures:
-        - arm64
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref BooksTable
-      Timeout: 30
+  # DotNetARMFunction:
+  #   Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+  #   Properties:
+  #     CodeUri: dotnet-arm/DotNetARMFunction
+  #     Handler: DotNetFunction::DotNetFunction.Function::FunctionHandler
+  #     Runtime: dotnetcore3.1
+  #     MemorySize: 256
+  #     Tracing: Active
+  #     Architectures:
+  #       - arm64
+  #     Policies:
+  #       - DynamoDBCrudPolicy:
+  #           TableName: !Ref BooksTable
+  #     Timeout: 30
 
-      Events:
-        CreateBook:
-          Type: Api
-          Properties:
-            Path: /dotnet-arm/book
-            Method: post
+  #     Events:
+  #       CreateBook:
+  #         Type: Api
+  #         Properties:
+  #           Path: /dotnet-arm/book
+  #           Method: post
 
-  RubyFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-    Properties:
-      CodeUri: ruby/RubyFunction
-      Handler: app.create
-      Runtime: ruby2.7
-      MemorySize: 256
-      Tracing: Active
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref BooksTable
-      Timeout: 10
+  # RubyFunction:
+  #   Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+  #   Properties:
+  #     CodeUri: ruby/RubyFunction
+  #     Handler: app.create
+  #     Runtime: ruby2.7
+  #     MemorySize: 256
+  #     Tracing: Active
+  #     Policies:
+  #       - DynamoDBCrudPolicy:
+  #           TableName: !Ref BooksTable
+  #     Timeout: 10
 
-      Events:
-        CreateBook:
-          Type: Api
-          Properties:
-            Path: /ruby/book
-            Method: post
+  #     Events:
+  #       CreateBook:
+  #         Type: Api
+  #         Properties:
+  #           Path: /ruby/book
+  #           Method: post
 
-  RubyARMFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-    Properties:
-      CodeUri: ruby/RubyFunction
-      Handler: app.create
-      Runtime: ruby2.7
-      MemorySize: 256
-      Tracing: Active
-      Architectures:
-        - arm64
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref BooksTable
-      Timeout: 10
+  # RubyARMFunction:
+  #   Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+  #   Properties:
+  #     CodeUri: ruby/RubyFunction
+  #     Handler: app.create
+  #     Runtime: ruby2.7
+  #     MemorySize: 256
+  #     Tracing: Active
+  #     Architectures:
+  #       - arm64
+  #     Policies:
+  #       - DynamoDBCrudPolicy:
+  #           TableName: !Ref BooksTable
+  #     Timeout: 10
 
-      Events:
-        CreateBook:
-          Type: Api
-          Properties:
-            Path: /ruby-arm/book
-            Method: post
+  #     Events:
+  #       CreateBook:
+  #         Type: Api
+  #         Properties:
+  #           Path: /ruby-arm/book
+  #           Method: post
 
   BooksTable:
     Type: AWS::DynamoDB::Table

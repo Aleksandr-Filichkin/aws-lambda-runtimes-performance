@@ -66,31 +66,32 @@ Resources:
           Properties:
             Path: /graal/book
             Method: post
-#
-  GraalVMARMFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: not.used.in.provided.runtime
-      Runtime: provided.al2
-      CodeUri: java-graalvm-lambda/output-arm/dist-arm/function.zip
-      MemorySize: 256
-      Architectures:
-        - arm64
-      Tracing: Active
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref BooksTable
-      Timeout: 10
-      Environment:
-        Variables:
-          TABLE_NAME: test
 
-      Events:
-        CreateBook:
-          Type: Api
-          Properties:
-            Path: /graal-arm/book
-            Method: post
+# To slow compilation ~40 min in GitHub actions
+#  GraalVMARMFunction:
+#    Type: AWS::Serverless::Function
+#    Properties:
+#      Handler: not.used.in.provided.runtime
+#      Runtime: provided.al2
+#      CodeUri: java-graalvm-lambda/output-arm/dist-arm/function.zip
+#      MemorySize: 256
+#      Architectures:
+#        - arm64
+#      Tracing: Active
+#      Policies:
+#        - DynamoDBCrudPolicy:
+#            TableName: !Ref BooksTable
+#      Timeout: 10
+#      Environment:
+#        Variables:
+#          TABLE_NAME: test
+#
+#      Events:
+#        CreateBook:
+#          Type: Api
+#          Properties:
+#            Path: /graal-arm/book
+#            Method: post
 
   RustFunction:
     Type: AWS::Serverless::Function
@@ -302,9 +303,9 @@ Resources:
             Method: post
 
   DotNetFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Type: AWS::Serverless::Function
     Properties:
-      CodeUri: dotnet/DotNetFunction
+      CodeUri: dotnet-lambda/output
       Handler: DotNetFunction::DotNetFunction.Function::FunctionHandler
       Runtime: dotnetcore3.1
       MemorySize: 256
@@ -324,7 +325,7 @@ Resources:
   DotNetARMFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: dotnet-arm/DotNetARMFunction
+      CodeUri: dotnet-lambda/output
       Handler: DotNetFunction::DotNetFunction.Function::FunctionHandler
       Runtime: dotnetcore3.1
       MemorySize: 256

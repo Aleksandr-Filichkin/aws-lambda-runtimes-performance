@@ -1,9 +1,8 @@
-FROM ghcr.io/graalvm/graalvm-ce:latest
+FROM ghcr.io/graalvm/native-image:latest
 
-RUN gu install native-image
 WORKDIR /tmp/dist
 ADD ./output/lambda-graalvm-1.0-SNAPSHOT.jar ./app.jar
-RUN native-image -jar ./app.jar --verbose --no-fallback
+RUN $JAVA_HOME/bin/native-image -jar ./app.jar --verbose --no-fallback
 RUN  microdnf install zip
 
 ADD bootstrap bootstrap

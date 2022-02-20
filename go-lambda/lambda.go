@@ -74,7 +74,7 @@ func Handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 func main() {
 	// Creating session for client
 	sess := session.Must(session.NewSessionWithOptions(session.Options{
-		Config:            aws.Config{Region: aws.String("us-east-2")},
+		Config:            aws.Config{Region: aws.String("us-east-1")},
 		SharedConfigState: session.SharedConfigEnable,
 	}))
 

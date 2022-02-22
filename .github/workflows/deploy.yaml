@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ ci ]
+    branches: [ master,ci ]
   pull_request:
-    branches: [ ci ]
+    branches: [ master ]
 
 jobs:
 
@@ -25,5 +25,5 @@ jobs:
       - name: Build and Deploy
         run: . ./build.sh
 
-      - name: Test
+      - name: Test result
         run: . ./test.sh

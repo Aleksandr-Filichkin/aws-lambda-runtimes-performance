@@ -27,6 +27,4 @@ alias sam='sam.cmd'
 sam build --use-container NodeJsFunction -b nodejs
 sam build --use-container RubyFunction -b ruby
 
-
-
 sam deploy -t template-final.yaml --no-confirm-changeset --no-fail-on-empty-changeset --stack-name sam-hello-world --s3-bucket aws-lambda-comparison --capabilities CAPABILITY_IAM

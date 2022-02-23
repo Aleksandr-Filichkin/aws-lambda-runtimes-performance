@@ -3,7 +3,7 @@ import uuid
 
 import boto3
 
-dynamodb = boto3.resource('dynamodb',region_name='us-east-2')
+dynamodb = boto3.resource('dynamodb',region_name='us-east-1')
 table = dynamodb.Table('book')
 
 def create(event, context):

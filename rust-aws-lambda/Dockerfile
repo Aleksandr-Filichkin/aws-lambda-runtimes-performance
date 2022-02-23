@@ -1,4 +1,4 @@
-FROM rust:1.54.0
+FROM rust:1.58.1
 
 # 2. Copy the files in your machine to the Docker image
 COPY ./ ./

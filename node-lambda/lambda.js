@@ -2,13 +2,12 @@
 
 const uuid = require('uuid');
 const DynamoDB = require('aws-sdk/clients/dynamodb'); // eslint-disable-line import/no-extraneous-dependencies import/no-internal-modules
-const dynamoDb = new DynamoDB.DocumentClient({ region: "us-east-2" });
+const dynamoDb = new DynamoDB.DocumentClient({ region: "us-east-1" });
 
-module.exports.create = async (event, context) => {
+module.exports.create = (event, context, callback) => {
   // @see https://docs.aws.amazon.com/lambda/latest/dg/nodejs-context.html
   context.callbackWaitsForEmptyEventLoop = false;
-
-  const { name, author }  = JSON.parse(event.body);
+  const data = JSON.parse(event.body);
 
   const params = {
     TableName: 'book',
@@ -19,21 +18,24 @@ module.exports.create = async (event, context) => {
     },
   };
 
-  // write to the database
-  try {
-    await dynamoDb.put(params).promise();
+  // write  to the database
+  dynamoDb.put(params, (error) => {
+    // handle potential errors
+    if (error) {
+      console.error(error);
+      callback(null, {
+        statusCode: error.statusCode || 501,
+        headers: { 'Content-Type': 'text/plain' },
+        body: 'Couldn\'t create the todo item.',
+      });
+      return;
+    }
 
     // create a response
-    return {
+    const response = {
       statusCode: 201,
       body: JSON.stringify(params.Item),
     };
-  } catch (e) {
-    console.error(e);
-    return {
-      statusCode: e.statusCode || 501,
-      headers: { 'Content-Type': 'text/plain' },
-      body: 'Couldn\'t create the todo item.',
-    });
-  }
+    callback(null, response);
+  });
 };

@@ -39,7 +39,7 @@ public class Main {
         DynamoDbEnhancedClient dynamoDbEnhancedClient = DynamoDbEnhancedClient.builder()
                 .dynamoDbClient(DynamoDbClient.builder()
                         .credentialsProvider(EnvironmentVariableCredentialsProvider.create())
-                        .region(Region.US_EAST_2).build())
+                        .region(Region.US_EAST_1).build())
                 .build();
         StaticTableSchema<Book> schema = buildDynamodbSchema();
         DynamoDbTable<Book> dynamoDbTable = dynamoDbEnhancedClient.table(TABLE_NAME, schema);

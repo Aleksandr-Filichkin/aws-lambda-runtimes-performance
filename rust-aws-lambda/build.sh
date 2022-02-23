@@ -8,8 +8,8 @@ rustup target add aarch64-unknown-linux-gnu
 set RUSTFLAGS="-C target-cpu=neoverse-n1"
 
 # winpty for windows
-winpty  cross build  --release --target aarch64-unknown-linux-gnu
-# cross build  --release --target aarch64-unknown-linux-gnu uncomment for linux
+#winpty  cross build  --release --target aarch64-unknown-linux-gnu
+cross build  --release --target aarch64-unknown-linux-gnu
 
 #builds a native binary and zip
 docker build  -t rust-lambda .

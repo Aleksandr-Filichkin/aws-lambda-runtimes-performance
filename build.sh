@@ -7,6 +7,11 @@ sh build.sh
 cd ./../
 ##
 #build Go
+cd ./dotnet-lambda
+sh build.sh
+cd ./../
+
+#build Go
 cd ./go-lambda
 sh build.sh
 cd ./../
@@ -21,11 +26,5 @@ cd ./../
 alias sam='sam.cmd'
 sam build --use-container NodeJsFunction -b nodejs
 sam build --use-container RubyFunction -b ruby
-#todo move to docker .net lambda
-sam build DotNetFunction -b dotnet
-sam build DotNetARMFunction -b dotnet-arm
 
-
-
-# deploy using another template because it refers to another build folder which where built before in docker
-sam deploy -t template-final.yaml
+sam deploy -t template-final.yaml --no-confirm-changeset --no-fail-on-empty-changeset --stack-name sam-hello-world --s3-bucket aws-lambda-comparison --capabilities CAPABILITY_IAM

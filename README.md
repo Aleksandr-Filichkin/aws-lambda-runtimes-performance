@@ -5,7 +5,7 @@ This repo contains full code and all scripts for the most popular AWS Lambda flo
 #### The full analyze is here https://filia-aleks.medium.com/benchmarking-all-aws-lambda-runtimes-in-2021-cold-start-part-1-e4146fe89385
 
 ## Supported runtimes x86_64 and ARM
-- Java 17
+- Java 11
 - NodeJs 14.x
 - Python 3.9
 - Go 1.17.7

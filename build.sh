@@ -15,7 +15,7 @@ cd ./../
 cd ./go-lambda
 sh build.sh
 cd ./../
-#
+
 #builds Java and GraalVM
 cd ./java-graalvm-lambda
 sh build.sh

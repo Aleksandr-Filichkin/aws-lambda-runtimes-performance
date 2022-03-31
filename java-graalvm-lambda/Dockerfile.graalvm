@@ -1,7 +1,7 @@
 FROM ghcr.io/graalvm/native-image:latest
 
 WORKDIR /tmp/dist
-ADD ./output/lambda-graalvm-1.0-SNAPSHOT.jar ./app.jar
+ADD ./src/lambda-graalvm/target/lambda-graalvm-1.0-SNAPSHOT.jar ./app.jar
 RUN $JAVA_HOME/bin/native-image -jar ./app.jar --verbose --no-fallback
 RUN  microdnf install zip
 

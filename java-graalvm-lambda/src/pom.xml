@@ -23,6 +23,7 @@
     <module>common</module>
     <module>lambda-java</module>
     <module>lambda-graalvm</module>
+    <module>quarkus-aws-lambda</module>
   </modules>
 
   <dependencyManagement>
@@ -76,17 +77,6 @@
   </build>
 
   <dependencies>
-    <dependency>
-      <groupId>com.amazonaws</groupId>
-      <artifactId>aws-lambda-java-core</artifactId>
-      <version>${aws.lambda.java.core.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.amazonaws</groupId>
-      <artifactId>aws-lambda-java-events</artifactId>
-      <version>${aws.lambda.java.events.version}</version>
-    </dependency>
 
     <dependency>
       <groupId>org.slf4j</groupId>

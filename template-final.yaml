@@ -6,7 +6,7 @@ Resources:
   JavaFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: java-graalvm-lambda/output/lambda-java-1.0-SNAPSHOT.jar
+      CodeUri: java-graalvm-lambda/src/lambda-java/target/lambda-java-1.0-SNAPSHOT.jar
       Handler: com.filichkin.blog.lambda.v2.handler.BookHandler::handleRequest
       Runtime: java11
       MemorySize: 256
@@ -25,7 +25,7 @@ Resources:
   JavaARMFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: java-graalvm-lambda/output/lambda-java-1.0-SNAPSHOT.jar
+      CodeUri: java-graalvm-lambda/src/lambda-java/target/lambda-java-1.0-SNAPSHOT.jar
       Handler: com.filichkin.blog.lambda.v2.handler.BookHandler::handleRequest
       Runtime: java11
       MemorySize: 256
@@ -67,6 +67,28 @@ Resources:
             Path: /graal/book
             Method: post
 
+  QuarkusVMFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: not.used.in.provided.runtime
+      Runtime: provided
+      CodeUri: java-graalvm-lambda/src/quarkus-aws-lambda/target/function.zip
+      MemorySize: 256
+      Tracing: Active
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref BooksTable
+      Timeout: 10
+      Environment:
+        Variables:
+          TABLE_NAME: test
+
+      Events:
+        CreateBook:
+          Type: Api
+          Properties:
+            Path: /quarkus/book
+            Method: post
 # To slow compilation ~40 min in GitHub actions
 #  GraalVMARMFunction:
 #    Type: AWS::Serverless::Function
@@ -92,7 +114,7 @@ Resources:
 #          Properties:
 #            Path: /graal-arm/book
 #            Method: post
-
+#
   RustFunction:
     Type: AWS::Serverless::Function
     Properties:
